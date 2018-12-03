@@ -9,7 +9,7 @@ from flask_login import (
 
 from app import db, login_manager
 from app.base import blueprint
-from app.base.forms import LoginForm, CreateAccountForm
+from app.base.forms import LoginForm, CreateAccountForm, ModifyAccountForm
 from app.base.models import User
 
 
@@ -18,10 +18,19 @@ def route_default():
     return redirect(url_for('base_blueprint.login'))
 
 
-@blueprint.route('/<template>')
+@blueprint.route('/<template>',  methods=['GET', 'POST'])
 @login_required
 def route_template(template):
-    return render_template(template + '.html')
+    if template == "1":
+        user = User.query.filter_by(id=template).first()
+        create_account_form = ModifyAccountForm(request.form)
+
+        return render_template(
+            'login/user.html',
+            create_account_form=create_account_form,
+            user=user)
+
+    return render_template('login/user.html')
 
 
 @blueprint.route('/fixed_<template>')
@@ -64,6 +73,20 @@ def create_user():
     db.session.add(user)
     db.session.commit()
     return jsonify('success')
+
+@blueprint.route('/modify_user', methods=['POST'])
+def modify_user():
+    form_data = User(**request.form)
+    db_data = User.query.get(form_data.id)
+    print(form_data.email)
+    print(db_data.email)
+
+    if db_data.email != form_data.email:
+        db_data.email = form_data.email
+        db.session.commit()
+        return jsonify('success')
+    return jsonify('duplicate')
+
 
 
 @blueprint.route('/logout')

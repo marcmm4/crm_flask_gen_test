@@ -16,5 +16,7 @@ class CreateAccountForm(FlaskForm):
 
 
 class ModifyAccountForm(FlaskForm):
+    id = TextField('Id')
+    username = TextField('Username', id='username_create')
     email = TextField('Email')
     password = PasswordField('Password', id='pwd_create')

@@ -16,14 +16,14 @@ from app import db, login_manager
 from app.users import blueprint
 from app.base.forms import LoginForm, CreateAccountForm
 from app.base.models import User
+from app.users.forms import ModifyAccountForm
 
 
 
 
-@blueprint.route('/<template>')
+@blueprint.route('/<template>', methods=['GET', 'POST'])
 @login_required
 def route_template(template):
-    print(template)
     user = User.query.filter_by(id=template).first()
-    return render_template('user.html', user=user)
-
+    user_form = ModifyAccountForm()
+    return render_template('user.html', user=user, user_form=user_form)
