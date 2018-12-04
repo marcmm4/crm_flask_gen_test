@@ -11,7 +11,9 @@ class User(db.Model, UserMixin):
 
     id = Column(Integer, primary_key=True)
     username = Column(String, unique=True)
-    email = Column(String, unique=True)
+    email = Column(String, unique=False)
+    firstname = Column(String, unique=False)
+    lastname = Column(String, unique=False)
     password = Column(Binary)
 
     def __init__(self, **kwargs):
@@ -28,7 +30,6 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return str(self.username)
-        #return "<User(username='%s', email='%s', password='%s')>" % (self.username, self.email, self.password)
 
 
 

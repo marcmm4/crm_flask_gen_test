@@ -14,9 +14,8 @@ from flask_login import (
 
 from app import db, login_manager
 from app.users import blueprint
-from app.base.forms import LoginForm, CreateAccountForm
 from app.base.models import User
-from app.users.forms import ModifyAccountForm
+from app.users.forms import ModifyUserForm
 
 
 
@@ -25,5 +24,27 @@ from app.users.forms import ModifyAccountForm
 @login_required
 def route_template(template):
     user = User.query.filter_by(id=template).first()
-    user_form = ModifyAccountForm()
-    return render_template('user.html', user=user, user_form=user_form)
+    modify_user_form = ModifyUserForm()
+    return render_template('user.html', user=user, modify_user_form=modify_user_form)
+
+
+@blueprint.route('/modify_user', methods=['POST'])
+def modify_user():
+    form_data = User(**request.form)
+    db_data = User.query.get(form_data.id)
+    change = False
+    if db_data.email != form_data.email:
+        db_data.email = form_data.email
+        change = True
+    if db_data.firstname != form_data.firstname:
+        db_data.firstname = form_data.firstname
+        change = True
+    if db_data.lastname != form_data.lastname:
+        db_data.lastname = form_data.lastname
+        change = True
+    if change:
+        db.session.commit()
+        return jsonify('success')
+    else:
+        return jsonify('no_change')
+    return jsonify('error')

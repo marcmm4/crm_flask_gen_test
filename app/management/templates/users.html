@@ -86,13 +86,12 @@
                       <td class=" ">{{ userinfo.id }} </td>
                       <td class=" ">{{ userinfo.username }} </td>
                       <td class=" ">{{ userinfo.email }} </td>
-                      <td class=" ">TBD </td>
-                      <td class=" ">TBD </td>
+                      <td class=" ">{{ userinfo.firstname }} </td>
+                      <td class=" ">{{ userinfo.lastname }} </td>
                       <td class=" last"><a href="/management/users/{{ userinfo.id }}">Modify</a>
                       </td>
                     </tr>
                     {% endfor %}
-
                   </tbody>
                 </table>
               </div>
