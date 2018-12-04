@@ -7,7 +7,6 @@ alertify: false
  * Create a new account.
  */
 function modify_user() { // eslint-disable-line no-unused-vars
-  alert("In user.js");
   if ($('#modify-user-form').parsley().validate()) {
     $.ajax({
       type: 'POST',
@@ -16,14 +15,14 @@ function modify_user() { // eslint-disable-line no-unused-vars
       data: $('#modify-user-form').serialize(),
       success: function(result) {
         alert(result);
-        if (result == 'duplicate') {
-          const message = 'Cannot create new user: duplicate entry.';
-          alertify.notify(message, 'error', 5);
-          alert("in here..")
+        if (result == 'no_change') {
+          const message = 'No changes.';
+          alertify.notify(message, 'warning', 5);
+        } else if (result == 'success') {
+          alertify.notify('User modified.', 'success', 5);
+          document.getElementById('login-button').click();
         } else {
-          alertify.notify('New user created.', 'success', 5);
-          alert("in here success..")
-
+          alertify.notify('There was an error', 'error', 5);
           document.getElementById('login-button').click();
         }
       },

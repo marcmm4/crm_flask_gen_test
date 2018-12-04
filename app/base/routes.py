@@ -78,14 +78,13 @@ def create_user():
 def modify_user():
     form_data = User(**request.form)
     db_data = User.query.get(form_data.id)
-    print(form_data.email)
-    print(db_data.email)
-
     if db_data.email != form_data.email:
         db_data.email = form_data.email
         db.session.commit()
         return jsonify('success')
-    return jsonify('duplicate')
+    else:
+        return jsonify('no_change')
+    return jsonify('error')
 
 
 
