@@ -1,6 +1,6 @@
 {% extends "base_site.html" %}
 
-{% block title %} Users {% endblock title %}
+{% block title %} Plain Page {% endblock title %}
 
 {% block stylesheets %}
   {{ super() }}
@@ -62,11 +62,14 @@
 
 
                         <div class="btn-group">
+                        <form data-parsley-validate id="modify_file_form" method="post">
                           <button class="btn btn-sm btn-primary" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Add"><i class="fa fa-plus-square"></i>  Add</button>
+                        </form>
                           <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Forward"><i class="fa fa-share"></i></button>
                           <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Print"><i class="fa fa-print"></i></button>
                           <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Trash"><i class="fa fa-trash-o"></i></button>
                         </div>
+
               </p>
 
 
@@ -79,7 +82,7 @@
                         <input type="checkbox" id="check-all" class="flat">
                       </th>
                       <th class="column-title">Id </th>
-                      <th class="column-title">Username </th>
+                      <th class="column-title">File Name </th>
                       <th class="column-title">Email </th>
                       <th class="column-title">First Name </th>
                       <th class="column-title">Last Name </th>

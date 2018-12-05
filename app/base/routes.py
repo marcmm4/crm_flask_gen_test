@@ -9,7 +9,7 @@ from flask_login import (
 
 from app import db, login_manager
 from app.base import blueprint
-from app.base.forms import LoginForm, CreateAccountForm, ModifyAccountForm
+from app.base.forms import LoginForm, CreateAccountForm
 from app.base.models import User
 
 
@@ -21,15 +21,6 @@ def route_default():
 @blueprint.route('/<template>')
 @login_required
 def route_template(template):
-    if template == "1":
-        user = User.query.filter_by(id=template).first()
-        create_account_form = ModifyAccountForm(request.form)
-
-        return render_template(
-            'login/user.html',
-            create_account_form=create_account_form,
-            user=user)
-
     return render_template(template+'.html')
 
 
