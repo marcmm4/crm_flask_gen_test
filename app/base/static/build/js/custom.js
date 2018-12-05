@@ -983,7 +983,12 @@ if (typeof NProgress != 'undefined') {
 			  $('#demo-form2').parsley().validate();
 			  validateFront();
 			});
+
 			var validateFront = function() {
+			  if (typeof(('#demo-form2').getContext) == 'undefined'){
+			  return;
+			  }
+
 			  if (true === $('#demo-form2').parsley().isValid()) {
 				$('.bs-callout-info').removeClass('hidden');
 				$('.bs-callout-warning').addClass('hidden');

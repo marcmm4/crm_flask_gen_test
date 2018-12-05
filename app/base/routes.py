@@ -18,7 +18,7 @@ def route_default():
     return redirect(url_for('base_blueprint.login'))
 
 
-@blueprint.route('/<template>',  methods=['GET', 'POST'])
+@blueprint.route('/<template>')
 @login_required
 def route_template(template):
     if template == "1":
@@ -30,7 +30,7 @@ def route_template(template):
             create_account_form=create_account_form,
             user=user)
 
-    return render_template('login/user.html')
+    return render_template(template+'.html')
 
 
 @blueprint.route('/fixed_<template>')
@@ -74,6 +74,7 @@ def create_user():
     db.session.commit()
     return jsonify('success')
 
+
 @blueprint.route('/modify_user', methods=['POST'])
 def modify_user():
     form_data = User(**request.form)
@@ -85,7 +86,6 @@ def modify_user():
     else:
         return jsonify('no_change')
     return jsonify('error')
-
 
 
 @blueprint.route('/logout')
