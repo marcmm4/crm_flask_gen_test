@@ -14,6 +14,8 @@ class User(db.Model, UserMixin):
     email = Column(String, unique=False)
     firstname = Column(String, unique=False)
     lastname = Column(String, unique=False)
+    test = Column(String, unique=False)
+
     password = Column(Binary)
 
     def __init__(self, **kwargs):

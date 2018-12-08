@@ -1,9 +1,12 @@
-from os import environ
+from os import environ, path
 
+basedir = path.abspath(path.dirname(__file__))
 
 class Config(object):
     SECRET_KEY = 'key'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
+    SQLITE = 'sqlite:///'
+    DATABASE_NAME = 'database.db'
+    SQLALCHEMY_DATABASE_URI = SQLITE + DATABASE_NAME
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # THEME SUPPORT
