@@ -9,6 +9,10 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = SQLITE + DATABASE_NAME
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    #Celery configuration
+    CELERY_BROKER_URL = 'redis://192.168.2.33:6379/0'
+    CELERY_RESULT_BACKEND = 'redis://192.168.2.33:6379/0'
+
     # THEME SUPPORT
     #  if set then url_for('static', filename='', theme='')
     #  will add the theme name to the static URL:

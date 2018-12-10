@@ -4,9 +4,12 @@ from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
 from logging import basicConfig, DEBUG, getLogger, StreamHandler
 from os import path
+from celery import Celery
+from config import Config
 
 db = SQLAlchemy()
 login_manager = LoginManager()
+celery = Celery(__name__, broker=Config.CELERY_BROKER_URL)
 
 
 def register_extensions(app):
@@ -67,6 +70,8 @@ def apply_themes(app):
                     values['filename'] = theme_file
         return url_for(endpoint, **values)
 
+def setup_celery(app):
+    celery.conf.update(app.config)
 
 def create_app(config, selenium=False):
     app = Flask(__name__, static_folder='base/static')
@@ -78,4 +83,9 @@ def create_app(config, selenium=False):
     configure_database(app)
     configure_logs(app)
     apply_themes(app)
+    celery.conf.update(app.config)
     return app
+
+
+
+
