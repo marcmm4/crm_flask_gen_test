@@ -36,6 +36,7 @@ def task():
 @blueprint.route('/status/<task_id>')
 def taskstatus(task_id):
     task = app.tasks.long_task.AsyncResult(task_id)
+    task = app.tasks.celery.AsyncResult(task_id)
     if task.state == 'PENDING':
         response = {
             'state': task.state,
