@@ -1,6 +1,6 @@
 {% extends "base_site.html" %}
 
-{% block title %} Plain Page {% endblock title %}
+{% block title %} Users {% endblock title %}
 
 {% block stylesheets %}
   {{ super() }}
@@ -32,6 +32,7 @@
         </div>
 
         <div class="clearfix"></div>
+
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
@@ -58,21 +59,57 @@
             <div class="x_content">
 
               <p>Add class <code>bulk_action</code> to table for bulk actions options on row select<br>
+
+
                         <div class="btn-group">
-                        <form data-parsley-validate id="modify_file_form" method="post">
-                          <button class="btn btn-sm btn-primary" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Add" id="create_new_task" onclick="create_task()"><i class="fa fa-plus-square"></i>  Add</button>
-                          <button class="btn btn-sm btn- default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Trash"><i class="fa fa-trash-o"></i></button>
-                          </form>
+                          <button class="btn btn-sm btn-primary" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Add"><i class="fa fa-plus-square"></i>  Add</button>
+                          <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Forward"><i class="fa fa-share"></i></button>
+                          <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Print"><i class="fa fa-print"></i></button>
+                          <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Trash"><i class="fa fa-trash-o"></i></button>
                         </div>
               </p>
 
-              <div class="progress">
-                <div id="progress">
-                  <div class="progress-bar progress-bar-info" data-transitiongoal="1"></div>
-                </div>
-                </div>
 
+
+              <div class="table-responsive">
+                <table class="table table-striped jambo_table bulk_action">
+                  <thead>
+                    <tr class="headings">
+                      <th>
+                        <input type="checkbox" id="check-all" class="flat">
+                      </th>
+                      <th class="column-title">Id </th>
+                      <th class="column-title">Username </th>
+                      <th class="column-title">Email </th>
+                      <th class="column-title">First Name </th>
+                      <th class="column-title">Last Name </th>
+                      <th class="column-title no-link last"><span class="nobr">Action</span>
+                      </th>
+                      <th class="bulk-actions" colspan="7">
+                        <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                  {% for userinfo in users %}
+                    <tr class="even pointer">
+                      <td class="a-center ">
+                        <input type="checkbox" class="flat" name="table_records">
+                      </td>
+                      <td class=" ">{{ userinfo.id }} </td>
+                      <td class=" ">{{ userinfo.username }} </td>
+                      <td class=" ">{{ userinfo.email }} </td>
+                      <td class=" ">{{ userinfo.firstname }} </td>
+                      <td class=" ">{{ userinfo.lastname }} </td>
+                      <td class=" last"><a href="/management/users/{{ userinfo.id }}">Modify</a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
               </div>
+            </div>
           </div>
         </div>
           <!--

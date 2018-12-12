@@ -1,11 +1,10 @@
-import time, random
-from flask import request, render_template, redirect, jsonify, url_for
+import time
+import random
+from flask import jsonify, url_for
+from app import celery
 
 
-
-
-
-@Celery.task(bind=True)
+@celery.task(bind=True)
 def long_task(self):
     """Background task that runs a long function with progress reports."""
     verb = ['Starting up', 'Booting', 'Repairing', 'Loading', 'Checking']
@@ -24,9 +23,3 @@ def long_task(self):
         time.sleep(1)
     return {'current': 100, 'total': 100, 'status': 'Task completed!',
             'result': 42}
-
-
-def longtask():
-    task = long_task.apply_async()
-    return jsonify({}), 202, {'Location': url_for('taskstatus',
-                                                  task_id=task.id)}

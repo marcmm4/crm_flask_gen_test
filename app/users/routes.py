@@ -18,8 +18,6 @@ from app.base.models import User
 from app.users.forms import ModifyUserForm
 
 
-
-
 @blueprint.route('/<template>', methods=['GET', 'POST'])
 @login_required
 def route_template(template):

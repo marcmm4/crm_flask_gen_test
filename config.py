@@ -10,8 +10,8 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     #Celery configuration
-    CELERY_BROKER_URL = 'redis://192.168.2.33:6379/0'
-    CELERY_RESULT_BACKEND = 'redis://192.168.2.33:6379/0'
+    CELERY_BROKER_URL = 'redis://10.151.150.245:6379/0'
+    CELERY_RESULT_BACKEND = 'redis://10.151.150.245:6379/0'
 
     # THEME SUPPORT
     #  if set then url_for('static', filename='', theme='')

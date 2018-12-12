@@ -19,7 +19,7 @@ def register_extensions(app):
 
 def register_blueprints(app):
     for module_name in ('base', 'forms', 'ui', 'home', 'tables', 'data', 'additional', 'base', 'management', 'users',
-                         'automation'):
+                         'automation', 'task', 'taskid', 'tasktype'):
         module = import_module('app.{}.routes'.format(module_name))
         app.register_blueprint(module.blueprint)
 
@@ -70,8 +70,6 @@ def apply_themes(app):
                     values['filename'] = theme_file
         return url_for(endpoint, **values)
 
-def setup_celery(app):
-    celery.conf.update(app.config)
 
 def create_app(config, selenium=False):
     app = Flask(__name__, static_folder='base/static')
