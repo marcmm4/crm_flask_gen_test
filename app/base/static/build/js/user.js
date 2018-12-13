@@ -45,7 +45,10 @@ $.ajax({
     type: 'POST',
     url: '/automation/long_task',
     success: function(data, status, request) {
-        status_url = request.getResponseHeader('Location');
+    console.log(data)
+    console.log(status)
+    console.log(request)
+        status_url = data;
         update_progress(status_url, nanobar, div[0]);
     },
     error: function() {
