@@ -4,12 +4,15 @@
 
 {% block stylesheets %}
   {{ super() }}
+
 {% endblock stylesheets %}
 
 
 
 
 {% block content %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/nanobar/0.2.1/nanobar.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <div class="right_col" role="main">
       <div class="">
         <div class="page-title">
@@ -60,7 +63,7 @@
               <p>Add class <code>bulk_action</code> to table for bulk actions options on row select<br>
                         <div class="btn-group">
                         <form data-parsley-validate id="modify_file_form" method="post">
-                          <button class="btn btn-sm btn-primary" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Add" id="create_new_task" onclick="create_task()"><i class="fa fa-plus-square"></i>  Add</button>
+                          <button class="btn btn-sm btn-primary" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Add" id="create_new_task" onclick="start_long_task()"><i class="fa fa-plus-square"></i>  Add</button>
                           <button class="btn btn-sm btn- default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Trash"><i class="fa fa-trash-o"></i></button>
                           </form>
                         </div>
@@ -68,7 +71,6 @@
 
               <div class="progress">
                 <div id="progress">
-                  <div class="progress-bar progress-bar-info" data-transitiongoal="1"></div>
                 </div>
                 </div>
 
@@ -110,7 +112,6 @@
 
 {% block javascripts %}
   {{ super() }}
-
   <!-- Alertify -->
   <script src="{{ url_for('static', filename='vendors/alertifyjs/alertify.min.js') }}"></script>
   <!-- Parsley -->
